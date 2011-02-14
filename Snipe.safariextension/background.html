@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Snipe</title>
+</head>
+<body>
+    <script>
+        var tab = safari.application.activeBrowserWindow.activeTab;
+        
+        safari.application.activeBrowserWindow.activeTab.addEventListener("message", function(e) {
+            if(e.name === "getTabData") {
+               e.target.page.dispatchMessage("getTabData", getTabData());
+            }
+            else if (e.name === 'getTabResults') {
+                e.target.page.dispatchMessage("getTabResults", getTabResults(e.message, getTabData()));
+            }
+            else if (e.name === 'selectTab') {
+                // console.log('selectTab', safari.application.activeBrowserWindow.tabs[e.message], safari.application.activeBrowserWindow.tabs[e.message].activate);
+                safari.application.activeBrowserWindow.tabs[e.message].activate();
+            }
+        }, false);
+        
+        function getTabData() {
+            var data = [],
+                tabs = safari.application.activeBrowserWindow.tabs,
+                tab;
+            
+            for (var i = 0, length = tabs.length; i < length; i++) {
+                tab = tabs[i];
+                data.push({
+                    title: tab.title,
+                    url: tab.url,
+                    index: i
+                });
+            }
+            
+            return data;
+        }
+        
+        function getTabResults(keyword, tabData) {
+            var results = [];
+            
+            for (var i = 0, length = tabData.length; i < length; i++) {
+                // console.log(keyword + ' > ' + tabData[i].title, new RegExp(keyword, '/i').test(tabData[i].title));
+                if (new RegExp(keyword, '/i').test(tabData[i].title)) {
+                    results.push(tabData[i]);
+                }
+            }
+            
+            return results;
+        }
+    </script>
+</body>
+</html>
