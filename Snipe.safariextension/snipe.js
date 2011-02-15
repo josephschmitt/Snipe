@@ -182,5 +182,10 @@ var Snipe = Class.extend({
                 self.toggle();
             }
         }, false);
+        
+        //Hide Snipe when the window loses focus
+        window.addEventListener('blur', function(e) {
+            self.hide();
+        });
     }
 });
