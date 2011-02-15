@@ -106,7 +106,6 @@ var Snipe = Class.extend({
                         items = resultsList.element.querySelectorAll('li'),
                         prev = curSelection - 1 < 0 ? items.length - 1 : curSelection - 1;
 
-                    // console.log('Up', prev);
                     resultsList.selectResult(items[prev]);
                 break;
 
