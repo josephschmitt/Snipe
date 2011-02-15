@@ -1,5 +1,5 @@
 function onMessageReceived(e) {
-    console.log('receive message', e.name, e.message);
+    // console.log('receive message', e.name, e.message);
     
     if (e.name === 'getTabResults') {
         snipe.refresh(e.message);
@@ -7,13 +7,13 @@ function onMessageReceived(e) {
 }
 
 function getResults(value) {
-    console.log('getResults')
+    // console.log('getResults')
     if (value.trim() === '') {
-        console.log('field empty');
+        // console.log('field empty');
         snipe.refresh();
     }
     else {
-        console.log('dispatchMessage getTabResults', value);
+        // console.log('dispatchMessage getTabResults', value);
         safari.self.tab.dispatchMessage('getTabResults', value);
     }
 }

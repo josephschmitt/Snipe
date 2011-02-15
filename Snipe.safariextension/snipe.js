@@ -51,8 +51,8 @@ var Snipe = Class.extend({
         }
 
         function destroy() {
+            // resultsList.destroy();
             document.body.removeChild(element);
-            resultsList.destroy();
 
             element = null;
             form = null;
@@ -78,7 +78,7 @@ var Snipe = Class.extend({
         }
 
         function onKeyUp(e) {
-            console.log('keyCode', e.keyCode);
+            // console.log('keyCode', e.keyCode);
 
             switch (e.keyCode) {
                 //Do nothing
@@ -104,7 +104,8 @@ var Snipe = Class.extend({
                 case 38:
                     var curIndex = /*(resultsList.curIndex === undefined || resultsList.curIndex === null) ? -1 :*/ resultsList.curIndex,
                         items = resultsList.element.querySelectorAll('li'),
-                        prev = curIndex - 1 < 0 ? items.length - 1 : curIndex - 1;
+                        length = items.length || 0,
+                        prev = curIndex - 1 < 0 ? length - 1 : curIndex - 1;
 
                     resultsList.selectResult(items[prev]);
                 break;
@@ -113,7 +114,8 @@ var Snipe = Class.extend({
                 case 40:
                     var curIndex = /*(resultsList.curIndex === undefined || resultsList.curIndex === null) ? -1 :*/ resultsList.curIndex,
                         items = resultsList.element.querySelectorAll('li'),
-                        next = curIndex + 1 >= items.length ? 0 : curIndex + 1;
+                        length = items.length || 0,
+                        next = curIndex + 1 >= length ? 0 : curIndex + 1;
                         
                     resultsList.selectResult(items[next]);
                 break;

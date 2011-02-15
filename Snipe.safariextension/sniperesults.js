@@ -99,6 +99,8 @@ Snipe.Results = Class.extend({
         };
 
         self.selectResult = function(item) {
+            if (!item) {return false;}
+            
             if (curSelection) {
                 self.deselectResult(curSelection);
             }
