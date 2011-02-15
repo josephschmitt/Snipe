@@ -41,7 +41,7 @@ Snipe.Results = Class.extend({
         }
 
         function onItemSelect(e) {
-            options.select.apply(null, [e.target.getAttribute('data-tab')])
+            self.activateResult(e.target);
         }
 
         function onItemHover(e) {
@@ -95,6 +95,7 @@ Snipe.Results = Class.extend({
             }
 
             updateLayout();
+            self.selectResult(items[0]);
         };
 
         self.selectResult = function(item) {
@@ -111,6 +112,14 @@ Snipe.Results = Class.extend({
             removeClass(item, 'active');
             curSelection = null;
             self.curIndex = null;
+        };
+        
+        self.activateResult = function(item) {
+            if (!item) {
+                item = curSelection;
+            }
+            
+            options.select.apply(null, [item.getAttribute('data-tab')]);
         };
 
         self.destroy = function() {

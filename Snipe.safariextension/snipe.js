@@ -78,7 +78,7 @@ var Snipe = Class.extend({
         }
 
         function onKeyUp(e) {
-            // console.log('keyCode', e.keyCode);
+            console.log('keyCode', e.keyCode);
 
             switch (e.keyCode) {
                 //Do nothing
@@ -102,18 +102,18 @@ var Snipe = Class.extend({
 
                 //Up arrow
                 case 38:
-                    var curSelection = (resultsList.curIndex === undefined || resultsList.curIndex === null) ? -1 : resultsList.curIndex,
+                    var curIndex = /*(resultsList.curIndex === undefined || resultsList.curIndex === null) ? -1 :*/ resultsList.curIndex,
                         items = resultsList.element.querySelectorAll('li'),
-                        prev = curSelection - 1 < 0 ? items.length - 1 : curSelection - 1;
+                        prev = curIndex - 1 < 0 ? items.length - 1 : curIndex - 1;
 
                     resultsList.selectResult(items[prev]);
                 break;
 
                 //Down arrow
                 case 40:
-                    var curSelection = (resultsList.curIndex === undefined || resultsList.curIndex === null) ? -1 : resultsList.curIndex,
+                    var curIndex = /*(resultsList.curIndex === undefined || resultsList.curIndex === null) ? -1 :*/ resultsList.curIndex,
                         items = resultsList.element.querySelectorAll('li'),
-                        next = curSelection + 1 >= items.length ? 0 : curSelection + 1;
+                        next = curIndex + 1 >= items.length ? 0 : curIndex + 1;
                         
                     resultsList.selectResult(items[next]);
                 break;
@@ -128,7 +128,7 @@ var Snipe = Class.extend({
         }
 
         function onFormSubmit(e) {
-            options.refresh(field.value);
+            resultsList.activateResult();
             e.preventDefault();
         }
 
