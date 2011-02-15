@@ -9,15 +9,18 @@
         var tab = safari.application.activeBrowserWindow.activeTab;
         
         safari.application.activeBrowserWindow.activeTab.addEventListener("message", function(e) {
-            if(e.name === "getTabData") {
-               e.target.page.dispatchMessage("getTabData", getTabData());
-            }
-            else if (e.name === 'getTabResults') {
-                e.target.page.dispatchMessage("getTabResults", getTabResults(e.message, getTabData()));
-            }
-            else if (e.name === 'selectTab') {
-                // console.log('selectTab', safari.application.activeBrowserWindow.tabs[e.message], safari.application.activeBrowserWindow.tabs[e.message].activate);
-                safari.application.activeBrowserWindow.tabs[e.message].activate();
+            console.log('received message', e.name);
+            switch (e.name) {
+                case 'getTabData':
+                    e.target.page.dispatchMessage("getTabData", getTabData());
+                break;
+                case 'getTabResults':
+                    console.log('dispatchMessage getTabResults', getTabResults(e.message, getTabData()));
+                    e.target.page.dispatchMessage("getTabResults", getTabResults(e.message, getTabData()));
+                break;
+                case 'selectTab':
+                    safari.application.activeBrowserWindow.tabs[e.message].activate();
+                break;
             }
         }, false);
         

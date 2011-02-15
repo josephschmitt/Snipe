@@ -1,30 +1,65 @@
+/* CSS RESET */
+.snipe, .snipe form, .snipe input, .snipe ul, .snipe li, .snipe div, .snipe em {
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    font-size: 100% !important;
+    font: inherit !important;
+    vertical-align: baseline !important;
+}
+
+.invisible {
+    display: none !important;
+}
+
 .snipe {
-    display: -webkit-box !important;
+    font-family: Georgia, sans-serif !important;
+
+    display: -webkit-box;
     -webkit-box-sizing: border-box !important;
     -webkit-box-pack: center !important;
-    
+
+    -webkit-transition-property: opacity, -webkit-transform !important;
+    -webkit-transition-duration: 200ms !important;
+    -webkit-transition-timing-function: ease-in-out !important;
+
     width: 100% !important;
     position: fixed !important;
     z-index: 999999 !important;
     top: 20px !important;
+
+    -webkit-transform: translateY(25px) !important;
+    opacity: 0 !important;
+}
+
+.snipe.in {
+    -webkit-transform: translateY(0) !important;
+    opacity: 1 !important;
+}
+
+.snipe.out {
+    -webkit-transform: translateY(-25px) !important;
+    opacity: 0 !important;
 }
 
 .snipe form {
     -webkit-border-radius: 5px !important;
     -webkit-box-sizing: border-box !important;
     -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.75) !important;
-    
+
     background: rgba(0, 0, 0, 0.6) !important;
     padding: 10px !important;
     display: block !important;
-    
+
     max-width: 400px !important;
     width: 70% !important;
 }
 
 .snipe input {
     -webkit-box-sizing: border-box !important;
-    
+
+/*    font-family: Helvetica, Arial, serif !important;*/
+    font-family: inherit !important;
     width: 100% !important;
     font-size: 22px !important;
     border: 1px solid black !important;
@@ -36,10 +71,11 @@
 
 .snipe ul {
     background: rgba(255, 255, 255, 0.9) !important;
-    padding: 10px !important;
+/*    padding: 10px !important;*/
     margin: 1px !important;
     overflow-y: auto !important;
     overflow-x: hidden !important;
+    list-style-type: none !important;
 }
 
 .snipe ul li {
@@ -47,22 +83,30 @@
     list-style: none !important;
     font-size: 16px !important;
     color: #666 !important;
-    padding-top: 10px !important;
-    margin-top: 10px !important;
+    padding: 10px !important;
+/*    margin-top: 10px !important;*/
     border-top: 1px dotted #999 !important;
+    cursor: default !important;
+    display: block !important;
+    text-align: left !important;
 }
 
-.snipe ul li a:link,
-.snipe ul li a:visited {
-    display: block !important;
-    font-size: 12px !important;
-    font-weight: normal !important;
-    color: #4272DB !important;
-    white-space: nowrap !important;
+.snipe ul li.active {
+    background: white;
 }
 
 .snipe ul li:first-child {
     border-top: 0 !important;
-    padding-top: 0 !important;
+/*    padding-top: 0 !important;*/
     margin-top: 0 !important;
+}
+
+.snipe ul li em {
+    display: inline !important;
+    font-size: 12px !important;
+    font-weight: normal !important;
+    color: #4272DB !important;
+    white-space: nowrap !important;
+    background: transparent !important;
+    border: 0 !important;
 }

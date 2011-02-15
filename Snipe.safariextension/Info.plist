@@ -25,9 +25,12 @@
 	<dict>
 		<key>Scripts</key>
 		<dict>
-			<key>End</key>
+			<key>Start</key>
 			<array>
-				<string>script.js</string>
+				<string>lib.js</string>
+				<string>snipe.js</string>
+				<string>sniperesults.js</string>
+				<string>page.js</string>
 			</array>
 		</dict>
 		<key>Stylesheets</key>
