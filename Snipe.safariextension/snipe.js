@@ -51,8 +51,8 @@ var Snipe = Class.extend({
         }
 
         function destroy() {
-            // resultsList.destroy();
-            document.body.removeChild(element);
+            resultsList.destroy();
+            element.parentNode.removeChild(element);
 
             element = null;
             form = null;
@@ -64,11 +64,15 @@ var Snipe = Class.extend({
 // EVENT HANDLERS _____________________________________________________________
 
         function onTransitionEnd(e) {
-            if (hasClass(element, 'in')) {
-                field.focus();
-            }
-            else {
-                destroy();
+            switch (e.propertyName) {
+                case 'opacity':
+                    if (hasClass(element, 'in')) {
+                        field.focus();
+                    }
+                    else {
+                        destroy();
+                    }
+                break;
             }
         }
 
