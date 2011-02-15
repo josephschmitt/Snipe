@@ -9,13 +9,11 @@
         var tab = safari.application.activeBrowserWindow.activeTab;
         
         safari.application.activeBrowserWindow.activeTab.addEventListener("message", function(e) {
-            console.log('received message', e.name);
             switch (e.name) {
                 case 'getTabData':
                     e.target.page.dispatchMessage("getTabData", getTabData());
                 break;
                 case 'getTabResults':
-                    console.log('dispatchMessage getTabResults', getTabResults(e.message, getTabData()));
                     e.target.page.dispatchMessage("getTabResults", getTabResults(e.message, getTabData()));
                 break;
                 case 'selectTab':
@@ -45,7 +43,6 @@
             var results = [];
             
             for (var i = 0, length = tabData.length; i < length; i++) {
-                // console.log(keyword + ' > ' + tabData[i].title, new RegExp(keyword, '/i').test(tabData[i].title));
                 if (new RegExp(keyword, '/i').test(tabData[i].title)) {
                     results.push(tabData[i]);
                 }

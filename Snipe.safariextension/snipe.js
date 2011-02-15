@@ -90,7 +90,6 @@ var Snipe = Class.extend({
                 case 17: //Ctrl key
                 case 18: //Option key
                 case 20: //Caps lock key
-                case 27: //Esc key
                 case 37: //Left arrow
                 case 39: //Right arrow
                 case 91: //Cmd key
@@ -122,6 +121,10 @@ var Snipe = Class.extend({
                         next = curIndex + 1 >= length ? 0 : curIndex + 1;
                         
                     resultsList.selectResult(items[next]);
+                break;
+                
+                case 27: //Esc key
+                    snipe.hide();
                 break;
 
                 //Get results
@@ -168,5 +171,16 @@ var Snipe = Class.extend({
             if (!element) {return false;}
             resultsList.refresh(data);
         };
+
+
+// CONSTRUCTOR ________________________________________________________________
+        
+        //Listen on the entire window for the activation shortcut key
+        window.addEventListener('keydown', function(e) {
+            //Ctrl + Alt + Space
+            if (e.ctrlKey && e.altKey && e.keyCode === 32) {
+                self.toggle();
+            }
+        }, false);
     }
 });
