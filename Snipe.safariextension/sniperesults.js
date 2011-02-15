@@ -13,15 +13,14 @@ Snipe.Results = Class.extend({
     init: function(element, options) {
         var self = this,
             items = element.querySelectorAll('li'),
-            
-            curIndex,
+
             curSelection;
-        
+
         self.element = element;
-    
-            
+
+
 // PRIVATE METHODS ____________________________________________________________
-    
+
         function updateLayout() {
             var height = 0;
 
@@ -40,11 +39,11 @@ Snipe.Results = Class.extend({
                 addClass(element, 'invisible');
             }
         }
-        
+
         function onItemSelect(e) {
             options.select.apply(null, [e.target.getAttribute('data-tab')])
         }
-        
+
         function onItemHover(e) {
             e.cancelBubble = true;
 
@@ -79,7 +78,7 @@ Snipe.Results = Class.extend({
             else {
                 element.innerHTML = tmpl(
                     '<% for ( var i = 0; i < results.length; i++ ) { %>\
-                        <li data-tab="<%= results[i].index %>"><%= results[i].title %>\
+                        <li data-tab="<%= results[i].index %>" data-index="<%= i %>"><%= results[i].title %>\
                             <em><%= results[i].url %></em>\
                         </li>\
                      <% } %>',
@@ -87,7 +86,7 @@ Snipe.Results = Class.extend({
                 );
 
                 items = element.querySelectorAll('li');
-                
+
                 for (var i = 0; i < items.length; i++) {
                     items[i].addEventListener('mouseover', onItemHover, false);
                     items[i].addEventListener('mouseout', onItemLeave, false);
@@ -97,26 +96,26 @@ Snipe.Results = Class.extend({
 
             updateLayout();
         };
-        
+
         self.selectResult = function(item) {
             if (curSelection) {
                 self.deselectResult(curSelection);
             }
 
             addClass(item, 'active');
-            curIndex = parseInt(item.getAttribute('data-tab'));
-            curSelection = items[curIndex];
+            self.curIndex = parseInt(item.getAttribute('data-index'));
+            curSelection = items[self.curIndex];
         };
 
         self.deselectResult = function(item) {
             removeClass(item, 'active');
             curSelection = null;
-            curIndex = null;
+            self.curIndex = null;
         };
-        
+
         self.destroy = function() {
             element.parentNode.removeChild(element);
-            
+
             element = null;
             items = null;
         };
