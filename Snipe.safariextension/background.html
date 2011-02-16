@@ -7,16 +7,13 @@
 </head>
 <body>
     <script>
-        var tab = safari.application.activeBrowserWindow.activeTab;
-        
         safari.application.addEventListener("message", function(e) {
             switch (e.name) {
                 case 'getTabData':
                     e.target.page.dispatchMessage("getTabData", getTabData());
                 break;
                 case 'getTabResults':
-                    var t = getTabResults(e.message, getTabData());
-                    e.target.page.dispatchMessage("getTabResults", t);
+                    e.target.page.dispatchMessage("getTabResults", getTabResults(e.message, getTabData()));
                 break;
                 case 'selectTab':
                     safari.application.activeBrowserWindow.tabs[e.message].activate();
