@@ -22,6 +22,6 @@ if (window.top === window) {
         refresh: getResults,
         select: selectTab
     });
-
+    
     safari.self.addEventListener("message", onMessageReceived, false);
 }
