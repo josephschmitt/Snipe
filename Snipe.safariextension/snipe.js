@@ -48,11 +48,20 @@ var Snipe = Class.extend({
             element.addEventListener('webkitTransitionEnd', onTransitionEnd, false );
             field.addEventListener('keyup', onKeyUp, false);
             form.addEventListener('submit', onFormSubmit, false);
+            
+            //Hide Snipe when the window loses focus
+            window.addEventListener('blur', onWindowBlur);
+            
+            //Hide snipe when clicking outside the snipe window
+            window.addEventListener('click', onWindowClick);
         }
 
         function destroy() {
             resultsList.destroy();
             element.parentNode.removeChild(element);
+            
+            window.removeEventListener('blur', onWindowBlur);
+            window.removeEventListener('click', onWindowClick);
 
             element = null;
             form = null;
@@ -140,6 +149,16 @@ var Snipe = Class.extend({
             resultsList.activateResult();
             e.preventDefault();
         }
+        
+        function onWindowBlur(e) {
+            self.hide();
+        }
+        
+        function onWindowClick(e) {
+            if (!hasAncestor(e.target, element) || e.target == element) {
+                self.hide();
+            }
+        }
 
 
 // PRIVILEGED METHODS _________________________________________________________
@@ -182,10 +201,5 @@ var Snipe = Class.extend({
                 self.toggle();
             }
         }, false);
-        
-        //Hide Snipe when the window loses focus
-        window.addEventListener('blur', function(e) {
-            self.hide();
-        });
     }
 });

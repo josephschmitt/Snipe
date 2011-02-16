@@ -97,6 +97,29 @@
   
   
   /**
+   * Check if an element is an ancestor of this element.
+   * @param {HTMLElement} element The element to check from.
+   * @param {HTMLElement} ancestor The element to check for.
+   * @returns {boolean}
+   */
+  this.hasAncestor = function(element, ancestor) {
+      if (ancestor === element) {
+          return true;
+      }
+
+      var currentElement = element.parentNode;
+
+      while (currentElement) {
+          if (currentElement === ancestor) {
+              return true;
+          }
+          currentElement = currentElement.parentNode;
+      }
+
+      return false;
+  }
+  
+  /**
    * Element helpers
    * Shamelessly stolen and modified from Prototype.js 
    * http://github.com/sstephenson/prototype
@@ -106,7 +129,7 @@
       if (!element) return;
       var elementClassName = element.className;
       return (elementClassName.length > 0 && (elementClassName == className || new RegExp("(^|\\s)" + className + "(\\s|$)").test(elementClassName)));
-  }
+  };
 
   this.addClass = function(element, className) {
       if (!element) return;
@@ -114,11 +137,11 @@
           element.className += (element.className ? ' ' : '') + className;
       }
       return element;
-  }
+  };
 
   this.removeClass = function(element, className) {
       if (!element) return;
       element.className = element.className.replace(new RegExp("(^|\\s+)" + className + "(\\s+|$)"), ' ').trim();
       return element;
-  }
+  };
 })();
