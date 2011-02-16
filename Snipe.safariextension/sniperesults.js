@@ -3,12 +3,12 @@ Snipe.Results = Class.extend({
      * Init method
      * @param options (Object) - Options for the method.
      *  Eg.
-     *      options: {
-     *          select: function(index) {
-     *              //Method to handle what happens when an item is selected
-     *              //The index param is the index of the tab selected
-     *          }
+     *  options: {
+     *      select: function(index) {
+     *          //Method to handle what happens when an item is selected
+     *          //The index param is the index of the tab selected
      *      }
+     *  }
      */
     init: function(element, options) {
         var self = this,

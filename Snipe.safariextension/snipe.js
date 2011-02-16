@@ -3,17 +3,17 @@ var Snipe = Class.extend({
      * Init method
      * @param options (Object) - Options for the method.
      *  Eg.
-     *      options: {
-     *          refresh: function(value) {
-     *              //Method to handle fetching new data
-     *             //The value param is the value of the input field
-     *          },
-     *
-     *          select: function(index) {
-     *              //Method to handle what happens when an item is selected
-     *              //The index param is the index of the tab selected
-     *          }
+     *  options: {
+     *      refresh: function(value) {
+     *          //Method to handle fetching new data
+     *         //The value param is the value of the input field
+     *      },
+     *  
+     *      select: function(index) {
+     *          //Method to handle what happens when an item is selected
+     *          //The index param is the index of the tab selected
      *      }
+     *  }
      */
     init: function(options) {
         var self = this,
@@ -130,8 +130,8 @@ var Snipe = Class.extend({
                 //Get results
                 default:
                     clearTimeout(timer);
-                        timer = setTimeout(function () {
-                            options.refresh.apply(null, [field.value]);
+                    timer = setTimeout(function () {
+                        options.refresh.apply(null, [field.value]);
                     }, 100);
             }
         }

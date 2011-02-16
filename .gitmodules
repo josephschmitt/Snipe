@@ -1,0 +1,3 @@
+[submodule "Snipe.safariextension/string_score"]
+	path = Snipe.safariextension/string_score
+	url = https://github.com/joshaven/string_score.git
