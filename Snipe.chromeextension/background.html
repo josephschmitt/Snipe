@@ -48,8 +48,8 @@
                 for (var i = 0, length = tabs.length; i < length; i++) {
                     tab = tabs[i];
                     data.push({
-                        title: tab.title,
-                        url: tab.url,
+                        title: tab.title || '',
+                        url: tab.url || '',
                         index: tab.id,
                         score: 0,
                         
@@ -64,14 +64,17 @@
         
         function getTabResults(keyword, tabData) {
             var results = [],
+                searchTarget,
                 score;
             
             for (var i = 0, length = tabData.length; i < length; i++) {
-                score = tabData[i].title ? tabData[i].title.score(keyword) : 0;
+                searchTarget = tabData[i].title + ' ' + tabData[i].url;
+                score = searchTarget.score(keyword);
+                
                 if (score > 0) {
                     tabData[i].score = score;
                     
-                    // tabData[i].description = tabData[i].description.split(keyword).join('<match>' + keyword + '</match>');
+                    //Highlight the results
                     var regexp = new RegExp(keyword, 'i'),
                         match = regexp.exec(tabData[i].description);
                         
