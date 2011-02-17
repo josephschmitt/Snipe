@@ -1,0 +1,18 @@
+{
+	"name": "Snipe",
+	"version": "0.2",
+	"description": "Quickly find the tab you're looking for without ever leaving your keyboard.",
+	"permissions": [
+	  "tabs", "http://*/*"
+	],
+	"omnibox": { "keyword" : "sn" },
+	"background_page": "background.html",
+	"content_scripts": [{
+		"matches": ["http://*/*", "https://*/*"],
+		"js": ["lib.js", "snipe.js", "sniperesults.js", "page.js"],
+		"run_at": "document_end"
+	}]
+    // "icons": {
+    //  "48": "Icon-48.png"
+    // }
+}
