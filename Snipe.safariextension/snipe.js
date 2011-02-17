@@ -152,6 +152,7 @@ var Snipe = Class.extend({
                 default:
                     clearTimeout(timer);
                     timer = setTimeout(function () {
+                        if (!field || field.value) {return false;}
                         options.refresh.apply(null, [field.value]);
                     }, 100);
             }
@@ -213,9 +214,12 @@ var Snipe = Class.extend({
 
         //Listen on the entire window for the activation shortcut key
         window.addEventListener('keydown', function(e) {
+            var preventDefault = true;
+            
             //Ctrl + Alt + Space
             if (e.ctrlKey && e.altKey && e.keyCode === 32) {
                 self.toggle();
+                e.preventDefault();
             }
         }, false);
     }
