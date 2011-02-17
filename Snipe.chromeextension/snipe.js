@@ -6,9 +6,13 @@ var Snipe = Class.extend({
      *  options: {
      *      refresh: function(value) {
      *          //Method to handle fetching new data
-     *         //The value param is the value of the input field
+     *          //The value param is the value of the input field
      *      },
-     *  
+     *
+     *      onRefreshed: function(resultsList) {
+     *          //Method called after refresh operation
+     *      }
+     *
      *      select: function(index) {
      *          //Method to handle what happens when an item is selected
      *          //The index param is the index of the tab selected
@@ -48,10 +52,10 @@ var Snipe = Class.extend({
             element.addEventListener('webkitTransitionEnd', onTransitionEnd, false );
             field.addEventListener('keyup', onKeyUp, false);
             form.addEventListener('submit', onFormSubmit, false);
-            
+
             //Hide Snipe when the window loses focus
             window.addEventListener('blur', onWindowBlur);
-            
+
             //Hide snipe when clicking outside the snipe window
             window.addEventListener('click', onWindowClick);
         }
@@ -59,7 +63,7 @@ var Snipe = Class.extend({
         function destroy() {
             resultsList.destroy();
             element.parentNode.removeChild(element);
-            
+
             window.removeEventListener('blur', onWindowBlur);
             window.removeEventListener('click', onWindowClick);
 
@@ -128,10 +132,10 @@ var Snipe = Class.extend({
                         items = resultsList.element.querySelectorAll('li'),
                         length = items.length || 0,
                         next = curIndex + 1 >= length ? 0 : curIndex + 1;
-                        
+
                     resultsList.selectResult(items[next]);
                 break;
-                
+
                 case 27: //Esc key
                     snipe.hide();
                 break;
@@ -149,11 +153,11 @@ var Snipe = Class.extend({
             resultsList.activateResult();
             e.preventDefault();
         }
-        
+
         function onWindowBlur(e) {
             self.hide();
         }
-        
+
         function onWindowClick(e) {
             if (!hasAncestor(e.target, element) || e.target == element) {
                 self.hide();
@@ -169,6 +173,7 @@ var Snipe = Class.extend({
 
             setTimeout(function() {
                 addClass(element, 'in');
+                field.focus();
             }, 10);
         };
 
@@ -189,17 +194,10 @@ var Snipe = Class.extend({
         self.refresh = function(data) {
             if (!element) {return false;}
             resultsList.refresh(data);
-        };
 
-
-// CONSTRUCTOR ________________________________________________________________
-        
-        //Listen on the entire window for the activation shortcut key
-        window.addEventListener('keydown', function(e) {
-            //Ctrl + Alt + Space
-            if (e.ctrlKey && e.altKey && e.keyCode === 32) {
-                self.toggle();
+            if (options.onRefreshed) {
+                options.onRefreshed(element.clientHeight);
             }
-        }, false);
+        };
     }
 });

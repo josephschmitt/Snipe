@@ -6,12 +6,17 @@
 	  "tabs", "http://*/*"
 	],
 	"omnibox": { "keyword" : "tabs" },
+	"browser_action": {
+	    "default_icon": "images/icon-19.png",
+	    "default_title": "Snipe",
+	    "default_popup": "popup.html"
+	},
 	"background_page": "background.html",
-	"content_scripts": [{
-		"matches": ["http://*/*", "https://*/*"],
-		"js": ["lib.js", "snipe.js", "sniperesults.js", "page.js"],
-		"run_at": "document_end"
-	}],
+    "content_scripts": [{
+        "matches": ["http://*/*", "https://*/*"],
+        "js": ["content.js"],
+        "run_at": "document_start"
+    }],
 	"update_url": "http://reusablebits.com/extensions/Snipe.xml"
     // "icons": {
     //  "48": "Icon-48.png"

@@ -9,6 +9,40 @@
     <script>
         var results;
         
+        /**
+         * Handles using the extension as a popup
+         */
+        chrome.extension.onRequest.addListener(function(e, sender, sendResponse) {
+            switch (e.name) {
+                case 'openPopUp':
+                    chrome.windows.create({
+                        url: chrome.extension.getURL('popup.html'),
+                        width: 425,
+                        height: 300,
+                        type: 'popup'
+                    });
+                break;
+                case 'getTabData':
+                    sender.page.dispatchMessage("getTabData", getTabData());
+                break;
+                case 'getTabResults':
+                    getTabData(function(tabData) {
+                        //Save results
+                        results = getTabResults(e.message, tabData);
+                        
+                        //Return the results to the popup
+                        sendResponse({name: 'getTabResults', message: results});
+                    });
+                break;
+                case 'selectTab':
+                    chrome.tabs.update(parseInt(e.message), {selected: true});
+                break;
+            }
+        });
+        
+        /**
+         * Handles using the extension through the Omnibox
+         */
         chrome.omnibox.onInputChanged.addListener(function(text, suggest) {
             getTabData(function(tabData) {
                 //Save results
@@ -38,6 +72,7 @@
             
             chrome.tabs.update(tab_id, {selected: true});
         });
+        
         
         function getTabData(callback) {
             var data = [];

@@ -9,22 +9,24 @@ function getResults(value) {
         snipe.refresh();
     }
     else {
-        chrome.extension.sendRequest({name:'getTabResults', value:value});
-        // safari.self.tab.dispatchMessage('getTabResults', value);
+        chrome.extension.sendRequest({name:'getTabResults', message:value}, onMessageReceived);
     }
 }
 
 function selectTab(index) {
     chrome.extension.sendRequest({name:'selectTab', message:index});
-    // safari.self.tab.dispatchMessage('selectTab', index);
+}
+
+function updateLayout(height) {
+    window.resizeTo(window.width, height + 40);
 }
 
 if (window.top === window) {
     var snipe = new Snipe({
         refresh: getResults,
+        onRefreshed: updateLayout,
         select: selectTab
     });
     
-    chrome.extension.onRequest.addListener(onMessageReceived);
-    // safari.self.addEventListener("message", onMessageReceived, false);
+    snipe.show();
 }
