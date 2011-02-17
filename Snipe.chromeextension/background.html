@@ -7,16 +7,35 @@
 </head>
 <body>
     <script>
+        var results;
+        
         chrome.omnibox.onInputChanged.addListener(function(text, suggest) {
             getTabData(function(tabData) {
-                suggest(getTabResults(text, tabData));
+                //Save results
+                results = getTabResults(text, tabData);
+                
+                //Update results list in omnibar
+                suggest(results);
+                
+                //Update default suggestion to be top result
+                chrome.omnibox.setDefaultSuggestion({
+                    description: results[0].content
+                });
             });
         });
         
         chrome.omnibox.onInputEntered.addListener(function(text) {
-            if (text.indexOf(':') < 0) {return false;}
+            var tab_id;
             
-            var tab_id = parseInt(text.split(':')[0]);
+            //Get tab id of first result
+            if (text.indexOf(':') < 0) {
+                tab_id = parseInt(results[0].content.split(':')[0]);
+            }
+            //Get tab id of submitted result
+            else {
+                tab_id = parseInt(text.split(':')[0]);
+            }
+            
             chrome.tabs.update(tab_id, {selected: true});
         });
         
