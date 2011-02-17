@@ -7,7 +7,8 @@
 </head>
 <body>
     <script>
-        var results;
+        var results,
+            popup;
         
         /**
          * Handles using the extension as a popup
@@ -15,12 +16,29 @@
         chrome.extension.onRequest.addListener(function(e, sender, sendResponse) {
             switch (e.name) {
                 case 'openPopUp':
-                    chrome.windows.create({
-                        url: chrome.extension.getURL('popup.html'),
-                        width: 425,
-                        height: 300,
-                        type: 'popup'
+                    chrome.windows.getCurrent(function(curWindow) {
+                        var pWidth = 425,
+                            pHeight = 100,
+                            xOffset = Math.round(curWindow.left + curWindow.width/2 - pWidth/2),
+                            yOffset = Math.round(curWindow.top + 100);
+                        
+                        chrome.windows.create({
+                            url: chrome.extension.getURL('popup.html'),
+                            top: yOffset,
+                            left: xOffset,
+                            width: pWidth,
+                            height: pHeight,
+                            type: 'popup'
+                        }, function(popupWin) {
+                            popup = popupWin;
+                        });
                     });
+                break;
+                case 'closePopup':
+                    if (popup) {
+                        chrome.windows.remove(popup.id);
+                        popup = null;
+                    }
                 break;
                 case 'getTabData':
                     sender.page.dispatchMessage("getTabData", getTabData());
@@ -36,6 +54,12 @@
                 break;
                 case 'selectTab':
                     chrome.tabs.update(parseInt(e.message), {selected: true});
+                    
+                    //Close if in a popup
+                    if (popup) {
+                        chrome.windows.remove(popup.id);
+                        popup = null;
+                    }
                 break;
             }
         });

@@ -21,11 +21,16 @@ function updateLayout(height) {
     window.resizeTo(window.width, height + 40);
 }
 
+function closePopup() {
+    chrome.extension.sendRequest({name:'closePopup'});
+}
+
 if (window.top === window) {
     var snipe = new Snipe({
         refresh: getResults,
         onRefreshed: updateLayout,
-        select: selectTab
+        select: selectTab,
+        onDestroyed: closePopup
     });
     
     snipe.show();

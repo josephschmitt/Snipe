@@ -19,9 +19,9 @@
     -webkit-box-sizing: border-box !important;
     -webkit-box-pack: center !important;
 
-/*    -webkit-transition-property: opacity, -webkit-transform !important;
+    -webkit-transition-property: opacity;
     -webkit-transition-duration: 200ms !important;
-    -webkit-transition-timing-function: ease-in-out !important;*/
+    -webkit-transition-timing-function: ease-in-out !important;
 
 /*    width: 100% !important;
     position: fixed !important;
@@ -29,16 +29,16 @@
     top: 20px !important;*/
 
 /*    -webkit-transform: translateY(25px) !important;*/
-/*    opacity: 0 !important;*/
+    opacity: 0 !important;
 }
 
 .snipe.in {
-    -webkit-transform: translateY(0) !important;
+/*    -webkit-transform: translateY(0) !important;*/
     opacity: 1 !important;
 }
 
 .snipe.out {
-    -webkit-transform: translateY(-25px) !important;
+/*    -webkit-transform: translateY(-25px) !important;*/
     opacity: 0 !important;
 }
 

@@ -11,11 +11,15 @@ var Snipe = Class.extend({
      *
      *      onRefreshed: function(resultsList) {
      *          //Method called after refresh operation
-     *      }
+     *      },
      *
      *      select: function(index) {
      *          //Method to handle what happens when an item is selected
      *          //The index param is the index of the tab selected
+     *      },
+     * 
+     *      onDestroyed: function() {
+     *          //Method to handle what happens when snipe is destroyed
      *      }
      *  }
      */
@@ -71,6 +75,10 @@ var Snipe = Class.extend({
             form = null;
             field = null;
             resultsList = null;
+            
+            if (options.onDestroyed) {
+                options.onDestroyed();
+            }
         }
 
 
