@@ -7,7 +7,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>Snipe</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.josephschmitt.snipe</string>
+	<string>com.reusablebits.snipe</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleShortVersionString</key>
@@ -52,6 +52,8 @@
 			<string>All</string>
 		</dict>
 	</dict>
+	<key>Update Manifest URL</key>
+	<string>http://reusablebits.com/extensions/Snipe.plist</string>
 	<key>Website</key>
 	<string>http://reusablebits.com</string>
 </dict>
