@@ -5,6 +5,6 @@ Snipe is a Safari and Chrome extension that makes it easy to find the browser ta
 # TODO
 
  - Search for (and display) results for tabs in all windows, not just current one
- - Add a way to close a tab from the UI
+ - Add a way to close a tab from the UI (close all matching tabs?)
  - Firefox version (looking into this. we'll see...)
  - Search page content as an asynchronous Web Worker process as well as title and URL (unlikely to happen anytime soon)
