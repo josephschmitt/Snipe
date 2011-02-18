@@ -6,8 +6,8 @@ Snipe is a Safari and Chrome extension that makes it easy to find the browser ta
 
 Please note that this repository depends on the following two submodules to compile properly from souce:
 
- - Snipe-core (Core UI shared between the Safari and Chrome extensions)
- - String_score (Used for the fuzzy search scoring system)
+ - [Snipe-core](https://github.com/josephschmitt/Snipe-core) (Core UI shared between the Safari and Chrome extensions)
+ - [String_score](https://github.com/joshaven/string_score) (Used for the fuzzy search scoring system)
 
 After cloning this repository, make sure to init the submodules, otherwise you'll get a bunch of errors and who knows what other horrors.
 
