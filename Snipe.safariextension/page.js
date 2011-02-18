@@ -23,5 +23,16 @@ if (window.top === window) {
         select: selectTab
     });
     
+    //Listen on the entire window for the activation shortcut key
+    window.addEventListener('keydown', function(e) {
+        var preventDefault = true;
+        
+        //Ctrl + Alt + Space
+        if (e.ctrlKey && e.altKey && e.keyCode === 32) {
+            snipe.toggle();
+            e.preventDefault();
+        }
+    }, false);
+    
     safari.self.addEventListener("message", onMessageReceived, false);
 }
