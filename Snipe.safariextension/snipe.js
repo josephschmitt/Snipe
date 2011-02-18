@@ -55,6 +55,7 @@ var Snipe = Class.extend({
         function addEvents() {
             element.addEventListener('webkitTransitionEnd', onTransitionEnd, false );
             field.addEventListener('keyup', onKeyUp, false);
+            field.addEventListener('keydown', onKeyDown, false);
             form.addEventListener('submit', onFormSubmit, false);
 
             //Hide Snipe when the window loses focus
@@ -101,6 +102,36 @@ var Snipe = Class.extend({
             options.select.apply(null, [index]);
             self.hide();
         }
+        
+        function onKeyDown(e) {
+            switch (e.keyCode) {
+                //Up arrow
+                case 38:
+                    var curIndex = /*(resultsList.curIndex === undefined || resultsList.curIndex === null) ? -1 :*/ resultsList.curIndex,
+                        items = resultsList.element.querySelectorAll('li'),
+                        length = items.length || 0,
+                        prev = curIndex - 1 < 0 ? length - 1 : curIndex - 1;
+
+                    resultsList.selectResult(items[prev]);
+                    e.preventDefault();
+                break;
+
+                //Down arrow
+                case 40:
+                    var curIndex = /*(resultsList.curIndex === undefined || resultsList.curIndex === null) ? -1 :*/ resultsList.curIndex,
+                        items = resultsList.element.querySelectorAll('li'),
+                        length = items.length || 0,
+                        next = curIndex + 1 >= length ? 0 : curIndex + 1;
+
+                    resultsList.selectResult(items[next]);
+                    e.preventDefault();
+                break;
+
+                case 27: //Esc key
+                    snipe.hide();
+                break;
+            }
+        }
 
         function onKeyUp(e) {
             // console.log('keyCode', e.keyCode);
@@ -114,38 +145,11 @@ var Snipe = Class.extend({
                 case 37: //Left arrow
                 case 39: //Right arrow
                 case 91: //Cmd key
-                break;
-
-                //Home
-                case 36:
-                break;
-
-                //End
-                case 35:
-                break;
-
-                //Up arrow
-                case 38:
-                    var curIndex = /*(resultsList.curIndex === undefined || resultsList.curIndex === null) ? -1 :*/ resultsList.curIndex,
-                        items = resultsList.element.querySelectorAll('li'),
-                        length = items.length || 0,
-                        prev = curIndex - 1 < 0 ? length - 1 : curIndex - 1;
-
-                    resultsList.selectResult(items[prev]);
-                break;
-
-                //Down arrow
-                case 40:
-                    var curIndex = /*(resultsList.curIndex === undefined || resultsList.curIndex === null) ? -1 :*/ resultsList.curIndex,
-                        items = resultsList.element.querySelectorAll('li'),
-                        length = items.length || 0,
-                        next = curIndex + 1 >= length ? 0 : curIndex + 1;
-
-                    resultsList.selectResult(items[next]);
-                break;
-
+                case 36: //Home
+                case 35: //End
+                case 38: //Up arrow
+                case 40: //Down arrow
                 case 27: //Esc key
-                    snipe.hide();
                 break;
 
                 //Get results
