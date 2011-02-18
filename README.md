@@ -9,7 +9,7 @@ Please note that this repository depends on the following two submodules to comp
  - [Snipe-core](https://github.com/josephschmitt/Snipe-core) (Core UI shared between the Safari and Chrome extensions)
  - [String_score](https://github.com/joshaven/string_score) (Used for the fuzzy search scoring system)
 
-After cloning this repository, make sure to init the submodules, otherwise you'll get a bunch of errors and who knows what other horrors.
+After cloning this repository, make sure to [init the submodules](http://book.git-scm.com/5_submodules.html), otherwise you'll get a bunch of errors and who knows what other horrors.
 
 # TODO
 
