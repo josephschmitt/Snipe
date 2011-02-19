@@ -7,3 +7,6 @@
 [submodule "Snipe.chromeextension/snipe-core"]
 	path = Snipe.chromeextension/snipe-core
 	url = git@github.com:josephschmitt/Snipe-core.git
+[submodule "Snipe.safariextension/snipe-core"]
+	path = Snipe.safariextension/snipe-core
+	url = git@github.com:josephschmitt/Snipe-core.git
