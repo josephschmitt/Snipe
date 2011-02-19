@@ -4,9 +4,6 @@
 [submodule "Snipe.chromeextension/string_score"]
 	path = Snipe.chromeextension/string_score
 	url = https://github.com/joshaven/string_score.git
-[submodule "Snipe.safariextension/snipe-core"]
-	path = Snipe.safariextension/snipe-core
-	url = git@github.com:josephschmitt/Snipe-core.git
 [submodule "Snipe.chromeextension/snipe-core"]
 	path = Snipe.chromeextension/snipe-core
 	url = git@github.com:josephschmitt/Snipe-core.git
