@@ -27,16 +27,21 @@
             var data = [],
                 windows = safari.application.browserWindows,
                 tabs,
-                tab;
+                tab,
+                favicon;
             
             for (var i = 0, length = windows.length; i < length; i++) {
                 tabs = windows[i].tabs;
                 
                 for (var j = 0, length2 = tabs.length; j < length2; j++) {
                     tab = tabs[j];
+                    favicon = /http:\/\/[1-9a-zA-Z.\-]+\//.exec(tab.url);
+                    favicon = favicon && favicon[0] ? favicon[0] + 'favicon.ico' : '';
+                    
                     data.push({
                         title: tab.title || '',
                         url: tab.url || '',
+                        favicon: favicon,
                         winid: i,
                         tabid: j,
                         score: 0
