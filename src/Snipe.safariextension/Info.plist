@@ -31,6 +31,7 @@
 				<string>snipe-core/snipe.js</string>
 				<string>snipe-core/sniperesults.js</string>
 				<string>page.js</string>
+				<string>snipe-core/keycodes.js</string>
 			</array>
 		</dict>
 		<key>Stylesheets</key>
