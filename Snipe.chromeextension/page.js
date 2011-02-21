@@ -14,7 +14,6 @@ function getResults(value) {
 }
 
 function selectTab(winid, tabid) {
-    console.log('selectTab winid:', winid, 'tabid:', tabid);
     chrome.extension.sendRequest({name:'selectTab', message:{winid: winid, tabid: tabid}});
 }
 
@@ -28,6 +27,7 @@ function closePopup() {
 
 if (window.top === window) {
     var snipe = new Snipe({
+        maxResults: 5,
         refresh: getResults,
         onRefreshed: updateLayout,
         select: selectTab,

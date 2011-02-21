@@ -19,6 +19,7 @@ function selectTab(winid, tabid) {
 
 if (window.top === window) {
     var snipe = new Snipe({
+        maxResults: 5,
         refresh: getResults,
         select: selectTab
     });
