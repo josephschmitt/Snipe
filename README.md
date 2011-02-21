@@ -13,7 +13,7 @@ After cloning this repository, make sure to [init the submodules](http://book.gi
 
 # TODO
 
- - Search for (and display) results for tabs in all windows, not just current one
+ - <strike>Search for (and display) results for tabs in all windows, not just current one</strike>
  - Add a way to close a tab from the UI (close all matching tabs?)
  - Highlight matched words/phrases in custom UI in Safari and Chrome
  - Firefox version (looking into this. we'll see...)
