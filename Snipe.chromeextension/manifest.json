@@ -1,6 +1,6 @@
 {
 	"name": "Snipe",
-	"version": "0.3.2",
+	"version": "0.3.3",
 	"description": "Quickly find the tab you're looking for without ever leaving your keyboard.",
 	"permissions": [
 	  "tabs", "http://*/*"
