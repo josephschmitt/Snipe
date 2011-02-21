@@ -53,14 +53,7 @@
                     });
                 break;
                 case 'selectTab':
-                    chrome.windows.update(parseInt(e.message.winid), {focused: true});
-                    chrome.tabs.update(parseInt(e.message.tabid), {selected: true});
-                    
-                    //Close if in a popup
-                    if (popup) {
-                        chrome.windows.remove(popup.id);
-                        popup = null;
-                    }
+                    activateTab(e.message.winid, e.message.tabid);
                 break;
             }
         });
@@ -77,26 +70,44 @@
                 suggest(results);
                 
                 //Update default suggestion to be top result
-                chrome.omnibox.setDefaultSuggestion({
-                    description: results[0].content
-                });
+                if (results[0]) {
+                    chrome.omnibox.setDefaultSuggestion({
+                        description: results[0].content
+                    });
+                }
             });
         });
         
         chrome.omnibox.onInputEntered.addListener(function(text) {
-            var tab_id;
+            var ids,
+                winid,
+                tabid;
             
             //Get tab id of first result
             if (text.indexOf(':') < 0) {
-                tab_id = parseInt(results[0].content.split(':')[0]);
+                ids = results[0].content.split('-')[0];
             }
             //Get tab id of submitted result
             else {
-                tab_id = parseInt(text.split(':')[0]);
+                ids = text.split('-')[0];
             }
             
-            chrome.tabs.update(tab_id, {selected: true});
+            winid = ids.split(':')[0];
+            tabid = ids.split(':')[1];
+            
+            activateTab(winid, tabid);
         });
+        
+        function activateTab(winid, tabid) {
+            chrome.windows.update(parseInt(winid), {focused: true});
+            chrome.tabs.update(parseInt(tabid), {selected: true});
+            
+            //Close if in a popup
+            if (popup) {
+                chrome.windows.remove(popup.id);
+                popup = null;
+            }
+        }
         
         
         function getTabData(callback) {
@@ -120,12 +131,13 @@
                             tabid: tab.id,
                             score: 0,
                 
-                            content: tab.id + ': ' + tab.title,
+                            content: win.id + ':' + tab.id + '- ' + tab.title,
                             description: tab.title + ' <url>'+tab.url+'</url>'
                         });
                     }
                 }
                 
+                console.log('data', data);
                 callback(data);
             });
         }
