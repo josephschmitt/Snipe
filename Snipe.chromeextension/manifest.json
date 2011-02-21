@@ -5,6 +5,11 @@
 	"permissions": [
 	  "tabs", "http://*/*"
 	],
+	"icons": {
+        "16": "images/Icon-16.png",
+        "19": "images/Icon-19.png",
+        "48": "images/Icon-48.png"
+    },
 	"omnibox": { "keyword" : "tabs" },
 	"browser_action": {
 	    "default_icon": "images/icon-19.png",

@@ -1,6 +1,11 @@
 function onMessageReceived(e) {
-    if (e.name === 'getTabResults') {
-        snipe.refresh(e.message);
+    switch (e.name) {
+        case 'getTabResults':
+            snipe.refresh(e.message);
+        break;
+        case 'getFavicon':
+            document.querySelector('link[rel="shortcut icon"]')
+        break;
     }
 }
 
