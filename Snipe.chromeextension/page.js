@@ -13,8 +13,9 @@ function getResults(value) {
     }
 }
 
-function selectTab(index) {
-    chrome.extension.sendRequest({name:'selectTab', message:index});
+function selectTab(winid, tabid) {
+    console.log('selectTab winid:', winid, 'tabid:', tabid);
+    chrome.extension.sendRequest({name:'selectTab', message:{winid: winid, tabid: tabid}});
 }
 
 function updateLayout(height) {

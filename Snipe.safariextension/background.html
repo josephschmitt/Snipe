@@ -16,24 +16,32 @@
                     e.target.page.dispatchMessage("getTabResults", getTabResults(e.message, getTabData()));
                 break;
                 case 'selectTab':
-                    safari.application.activeBrowserWindow.tabs[e.message].activate();
+                    var win = safari.application.browserWindows[e.message.winid];
+                    win.activate();
+                    win.tabs[e.message.tabid].activate();
                 break;
             }
         }, false);
         
         function getTabData() {
             var data = [],
-                tabs = safari.application.activeBrowserWindow.tabs,
+                windows = safari.application.browserWindows,
+                tabs,
                 tab;
             
-            for (var i = 0, length = tabs.length; i < length; i++) {
-                tab = tabs[i];
-                data.push({
-                    title: tab.title || '',
-                    url: tab.url || '',
-                    index: i,
-                    score: 0
-                });
+            for (var i = 0, length = windows.length; i < length; i++) {
+                tabs = windows[i].tabs;
+                
+                for (var j = 0, length2 = tabs.length; j < length2; j++) {
+                    tab = tabs[j];
+                    data.push({
+                        title: tab.title || '',
+                        url: tab.url || '',
+                        winid: i,
+                        tabid: j,
+                        score: 0
+                    });
+                }
             }
             
             return data;

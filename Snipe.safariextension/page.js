@@ -13,8 +13,8 @@ function getResults(value) {
     }
 }
 
-function selectTab(index) {
-    safari.self.tab.dispatchMessage('selectTab', index);
+function selectTab(winid, tabid) {
+    safari.self.tab.dispatchMessage('selectTab', {winid: winid, tabid: tabid});
 }
 
 if (window.top === window) {

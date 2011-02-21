@@ -53,7 +53,8 @@
                     });
                 break;
                 case 'selectTab':
-                    chrome.tabs.update(parseInt(e.message), {selected: true});
+                    chrome.windows.update(parseInt(e.message.winid), {focused: true});
+                    chrome.tabs.update(parseInt(e.message.tabid), {selected: true});
                     
                     //Close if in a popup
                     if (popup) {
@@ -99,22 +100,25 @@
         
         
         function getTabData(callback) {
-            var data = [];
+            var data = [],
+                win;
             
-            chrome.tabs.getAllInWindow(null, function(tabs) {
-                var tab;
+            chrome.windows.getAll({populate: true}, function(windows) {
+                for (var i = 0, length = windows.length; i < length; i++) {
+                    win = windows[i];
+                    for (var j = 0, length = win.tabs.length; j < length; j++) {
+                        tab = win.tabs[j];
+                        data.push({
+                            title: tab.title || '',
+                            url: tab.url || '',
+                            winid: win.id,
+                            tabid: tab.id,
+                            score: 0,
 
-                for (var i = 0, length = tabs.length; i < length; i++) {
-                    tab = tabs[i];
-                    data.push({
-                        title: tab.title || '',
-                        url: tab.url || '',
-                        index: tab.id,
-                        score: 0,
-                        
-                        content: tab.id + ': ' + tab.title,
-                        description: tab.title + ' <url>'+tab.url+'</url>'
-                    });
+                            content: tab.id + ': ' + tab.title,
+                            description: tab.title + ' <url>'+tab.url+'</url>'
+                        });
+                    }
                 }
                 
                 callback(data);
