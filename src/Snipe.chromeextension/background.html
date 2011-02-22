@@ -118,7 +118,7 @@
             chrome.windows.getAll({populate: true}, function(windows) {
                 for (var i = 0, length = windows.length; i < length; i++) {
                     win = windows[i];
-                    for (var j = 0, length = win.tabs.length; j < length; j++) {
+                    for (var j = 0, length2 = win.tabs.length; j < length2; j++) {
                         tab = win.tabs[j];
                         favicon = /http:\/\/[1-9a-zA-Z.\-]+\//.exec(tab.url);
                         favicon = favicon && favicon[0] ? favicon[0] + 'favicon.ico' : '';
@@ -137,7 +137,6 @@
                     }
                 }
                 
-                console.log('data', data);
                 callback(data);
             });
         }
