@@ -1,6 +1,6 @@
 # Snipe
 
-Snipe is a Safari and Chrome extension that makes it easy to find the browser tab you're looking for without leaving your keyboard; kind of like [Spotlight](http://www.apple.com/macosx/what-is-macosx/spotlight.html) or [Quicksilver](http://quicksilver.en.softonic.com/mac) for your browser tabs.
+[Snipe](http://reusablebits.com/post/3468613560/say-hello-to-snipe) is a Safari and Chrome extension that allows you to quickly sift through the sea of open tabs you accumulate throughout the day. Simply invoke the keyboard shortcut and up pops a Quicksilver-like input field allowing you to search through your open tabs and select one, without ever leaving your keyboard. It's like having [Spotlight](http://www.apple.com/macosx/what-is-macosx/spotlight.html) or [Quicksilver](http://quicksilver.en.softonic.com/mac) for your browser tabs.
 
 ## Dependencies
 
