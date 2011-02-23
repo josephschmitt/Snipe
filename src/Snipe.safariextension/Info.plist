@@ -11,9 +11,9 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.3.5</string>
+	<string>0.3.5.1</string>
 	<key>CFBundleVersion</key>
-	<string>0.3.5</string>
+	<string>0.3.5.1</string>
 	<key>Chrome</key>
 	<dict>
 		<key>Database Quota</key>
@@ -54,7 +54,7 @@
 		</dict>
 	</dict>
 	<key>Update Manifest URL</key>
-	<string>http://reusablebits.com/extensions/Snipe.plist</string>
+	<string>https://s3.amazonaws.com/gosnipe.in/update/update-safari.plist</string>
 	<key>Website</key>
 	<string>http://reusablebits.com</string>
 </dict>
