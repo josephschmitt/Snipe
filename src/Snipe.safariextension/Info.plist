@@ -40,7 +40,7 @@
 		</array>
 	</dict>
 	<key>Description</key>
-	<string>Quickly find the tab you're looking for without ever leaving your keyboard.</string>
+	<string>Find the tab you're looking for without leaving your keyboard. Hit Ctrl+Alt+Space, type, and go!</string>
 	<key>ExtensionInfoDictionaryVersion</key>
 	<string>1.0</string>
 	<key>Permissions</key>
