@@ -1,6 +1,6 @@
 {
     "name": "Snipe",
-    "version": "0.4",
+    "version": "0.3.5.3",
     "description": "Find the tab you're looking for without leaving your keyboard. Hit Ctrl+Alt+Space, type, and go!",
     "permissions": [
       "tabs", "http://*/*"
@@ -19,7 +19,7 @@
     "background_page": "background.html",
     "content_scripts": [{
         "matches": ["http://*/*", "https://*/*"],
-        "js": ["content.js"],
+        "js": ["snipe-core/keycodes.js", "content.js"],
         "run_at": "document_start"
     }],
     "update_url": "https://s3.amazonaws.com/gosnipe.in/update/update-chrome.xml"

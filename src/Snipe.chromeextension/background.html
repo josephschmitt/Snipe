@@ -8,6 +8,7 @@
 <body>
     <script>
         var results,
+            currentWindow,
             popup;
         
         /**
@@ -16,11 +17,13 @@
         chrome.extension.onRequest.addListener(function(e, sender, sendResponse) {
             switch (e.name) {
                 case 'openPopUp':
-                    chrome.windows.getCurrent(function(curWindow) {
+                    chrome.windows.getCurrent(function(curWin) {
+                        currentWindow = curWin;
+                        
                         var pWidth = 425,
                             pHeight = 100,
-                            xOffset = Math.round(curWindow.left + curWindow.width/2 - pWidth/2),
-                            yOffset = Math.round(curWindow.top + 100);
+                            xOffset = Math.round(curWin.left + curWin.width/2 - pWidth/2),
+                            yOffset = Math.round(curWin.top + 100);
                         
                         chrome.windows.create({
                             url: chrome.extension.getURL('popup.html'),
@@ -99,7 +102,13 @@
         });
         
         function activateTab(winid, tabid) {
-            chrome.windows.update(parseInt(winid), {focused: true});
+            //Only switch windows if the window isn't the same.
+            //Avoids a Chrome for Windows bug where updating same window kicks it
+            //out of maximized mode.
+            if (!currentWindow || currentWindow.id != winid) {
+                chrome.windows.update(parseInt(winid), {focused: true});
+            }
+            
             chrome.tabs.update(parseInt(tabid), {selected: true});
             
             //Close if in a popup

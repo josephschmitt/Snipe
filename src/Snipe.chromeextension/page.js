@@ -18,7 +18,15 @@ function selectTab(winid, tabid) {
 }
 
 function updateLayout(height) {
-    window.resizeTo(window.width, height + 40);
+    var loc = window.location;
+     //Tweak for windows
+    if (/windows/i.test(navigator.userAgent)) {
+        height += 15;
+    }
+    
+    if (loc.protocol === 'chrome-extension:' && loc.href.indexOf('popup.html') > -1) {
+        window.resizeTo(window.width, height + 40);
+    }
 }
 
 function closePopup() {

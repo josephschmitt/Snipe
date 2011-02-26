@@ -11,5 +11,11 @@
     <script src="snipe-core/snipe.js" type="text/javascript"></script>
     <script src="snipe-core/sniperesults.js" type="text/javascript"></script>
     <script src="page.js" type="text/javascript"></script>
+    <script>
+        //Tweak for windows
+        if (/windows/i.test(navigator.userAgent)) {
+            window.resizeTo(window.width, 115);
+        }
+    </script>
 </body>
 </html>
