@@ -34,7 +34,7 @@ if (window.top === window) {
         var preventDefault = true;
         
         //Ctrl + Alt + Space
-        if (e.ctrlKey && e.altKey && e.keyCode === 32) {
+        if (e.ctrlKey && e.altKey && e.keyCode === KEY_SPACE) {
             snipe.toggle();
             e.preventDefault();
         }
