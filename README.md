@@ -13,7 +13,9 @@ After cloning this repository, make sure to [init the submodules](http://chrisje
 
 # TODO
 
+ - Customize keyboard shortcut
  - Add a way to close a tab from the UI (close all matching tabs?)
+ - Support favicons not placed in the root directory of a server
  - Highlight matched words/phrases in custom UI in Safari and Chrome
  - Firefox version (looking into this. we'll see...)
  - Search page content as an asynchronous Web Worker process as well as title and URL (unlikely to happen anytime soon)
