@@ -20,6 +20,23 @@
 		<real>5242880</real>
 		<key>Global Page</key>
 		<string>background.html</string>
+		<key>Toolbar Items</key>
+		<array>
+			<dict>
+				<key>Command</key>
+				<string>toggle</string>
+				<key>Identifier</key>
+				<string>com.snipe.toolbar</string>
+				<key>Image</key>
+				<string>Icon-19.png</string>
+				<key>Label</key>
+				<string>Toggle Snipe</string>
+				<key>Palette Label</key>
+				<string>Toggle Snipe</string>
+				<key>Tool Tip</key>
+				<string>Toggle Snipe</string>
+			</dict>
+		</array>
 	</dict>
 	<key>Content</key>
 	<dict>
@@ -27,16 +44,19 @@
 		<dict>
 			<key>Start</key>
 			<array>
-				<string>snipe-core/lib.js</string>
-				<string>snipe-core/keycodes.js</string>
-				<string>snipe-core/snipe.js</string>
-				<string>snipe-core/sniperesults.js</string>
+				<string>snipe-core/js/lib.js</string>
+				<string>snipe-core/js/browserdetect.js</string>
+				<string>snipe-core/js/keycodes.js</string>
+				<string>snipe-core/js/snipe.js</string>
+				<string>snipe-core/js/sniperesults.js</string>
+				<string>snipe-core/js/snipesettings.js</string>
+				<string>snipe-core/js/shortcut-field.js</string>
 				<string>page.js</string>
 			</array>
 		</dict>
 		<key>Stylesheets</key>
 		<array>
-			<string>snipe-core/styles.css</string>
+			<string>snipe-core/styles/styles.css</string>
 		</array>
 	</dict>
 	<key>Description</key>

@@ -10,14 +10,21 @@
         var SNIPE_STORAGE = 'snipe-ext',
             defaultSettings = {"shortcut":{"key":{"id":32,"name":"Space"},"modifiers":[{"id":17,"name":"Ctrl","modifier":"ctrlKey"},{"id":18,"name":"Alt","modifier":"altKey"}]}},
             settings = window.localStorage[SNIPE_STORAGE] ? JSON.parse(window.localStorage[SNIPE_STORAGE]) : defaultSettings;
-            
+        
+        /**
+         * Handles clicking on the toolbar button
+         */
+        safari.application.addEventListener('command', function(e) {
+            e.target.browserWindow.activeTab.page.dispatchMessage('toggle');
+        });
+        
         safari.application.addEventListener("message", function(e) {
             switch (e.name) {
                 case 'getTabData':
-                    e.target.page.dispatchMessage("getTabData", getTabData());
+                    e.target.page.dispatchMessage('getTabData', getTabData());
                 break;
                 case 'getTabResults':
-                    e.target.page.dispatchMessage("getTabResults", getTabResults(e.message, getTabData()));
+                    e.target.page.dispatchMessage('getTabResults', getTabResults(e.message, getTabData()));
                 break;
                 case 'selectTab':
                     var win = safari.application.browserWindows[e.message.winid];
@@ -25,7 +32,7 @@
                     win.tabs[e.message.tabid].activate();
                 break;
                 case 'getSettings':
-                    e.target.page.dispatchMessage("getSettings", settings);
+                    e.target.page.dispatchMessage('getSettings', settings);
                 break;
                 case 'updateSettings':
                     settings = e.message;
@@ -33,22 +40,22 @@
                 break;
             }
         }, false);
-        
+
         function getTabData() {
             var data = [],
                 windows = safari.application.browserWindows,
                 tabs,
                 tab,
                 favicon;
-            
+
             for (var i = 0, length = windows.length; i < length; i++) {
                 tabs = windows[i].tabs;
-                
+
                 for (var j = 0, length2 = tabs.length; j < length2; j++) {
                     tab = tabs[j];
                     favicon = /http:\/\/[1-9a-zA-Z.\-]+\//.exec(tab.url);
                     favicon = favicon && favicon[0] ? favicon[0] + 'favicon.ico' : '';
-                    
+
                     data.push({
                         title: tab.title || '',
                         url: tab.url || '',
@@ -59,15 +66,15 @@
                     });
                 }
             }
-            
+
             return data;
         }
-        
+
         function getTabResults(keyword, tabData) {
             var results = [],
                 searchTarget,
                 score;
-            
+
             for (var i = 0, length = tabData.length; i < length; i++) {
                 searchTarget = tabData[i].title + ' ' + tabData[i].url;
                 score = searchTarget.score(keyword);
@@ -77,15 +84,15 @@
                     results.push(tabData[i]);
                 }
             }
-            
+
             function sortDescending(a, b) {
                 return b.score - a.score;
             }
-            
+
             function sortAscending(a, b) {
                 return a.score - b.score;
             }
-            
+
             return results.sort(sortDescending);
         }
     </script>
