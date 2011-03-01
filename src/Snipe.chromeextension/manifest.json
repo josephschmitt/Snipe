@@ -13,8 +13,7 @@
     "omnibox": { "keyword" : "tabs" },
     "browser_action": {
         "default_icon": "images/Icon-19.png",
-        "default_title": "Snipe",
-        "default_popup": "popup.html"
+        "default_title": "Toggle Snipe"
     },
     "background_page": "background.html",
     "content_scripts": [{

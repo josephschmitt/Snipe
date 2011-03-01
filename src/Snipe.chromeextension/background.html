@@ -15,6 +15,16 @@
             defaultSettings = {"shortcut":{"key":{"id":32,"name":"Space"},"modifiers":[{"id":17,"name":"Ctrl","modifier":"ctrlKey"},{"id":18,"name":"Alt","modifier":"altKey"}]}},
             settings = window.localStorage[SNIPE_STORAGE] ? JSON.parse(window.localStorage[SNIPE_STORAGE]) : defaultSettings;
         
+        
+        /**
+         * Handles clicking on the toolbar button
+         */
+        chrome.browserAction.onClicked.addListener(function(tab) {
+            chrome.tabs.getSelected(null, function(tab) {
+              chrome.tabs.sendRequest(tab.id, {name: 'toggle'});
+            });
+        });
+        
         /**
          * Handles using the custom UI extension
          */

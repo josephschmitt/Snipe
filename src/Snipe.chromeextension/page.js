@@ -1,4 +1,6 @@
 function onMessageReceived(e) {
+    if (!snipe) {return;}
+    
     switch (e.name) {
         case 'getTabResults':
             snipe.refresh(e.message);
@@ -8,6 +10,9 @@ function onMessageReceived(e) {
         // break;
         case 'getSettings':
             snipe.updateSettings(e.message);
+        break;
+        case 'toggle':
+            snipe.toggle();
         break;
     }
 }
@@ -57,4 +62,6 @@ if (window.top === window) {
             e.preventDefault();
         }
     }, false);
+    
+    chrome.extension.onRequest.addListener(onMessageReceived);
 }
