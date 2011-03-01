@@ -6,6 +6,9 @@ function onMessageReceived(e) {
         case 'getFavicon':
             document.querySelector('link[rel="shortcut icon"]')
         break;
+        case 'getSettings':
+            snipe.updateSettings(e.message);
+        break;
     }
 }
 
@@ -22,19 +25,30 @@ function selectTab(winid, tabid) {
     safari.self.tab.dispatchMessage('selectTab', {winid: winid, tabid: tabid});
 }
 
+function getSettings() {
+    safari.self.tab.dispatchMessage('getSettings');
+}
+
+function updateSettings(settings) {
+    safari.self.tab.dispatchMessage('updateSettings', settings);
+}
+
 if (window.top === window) {
     var snipe = new Snipe({
         maxResults: 5,
         refresh: getResults,
-        select: selectTab
+        select: selectTab,
+        onSettingsChanged: updateSettings
     });
+    
+    getSettings();
     
     //Listen on the entire window for the activation shortcut key
     window.addEventListener('keydown', function(e) {
         var preventDefault = true;
         
         //Ctrl + Alt + Space
-        if (e.ctrlKey && e.altKey && e.keyCode === KEY_SPACE) {
+        if (snipe.matchesShortcut(e) /*e.ctrlKey && e.altKey && e.keyCode === KEY_SPACE*/) {
             snipe.toggle();
             e.preventDefault();
         }

@@ -7,6 +7,10 @@
 </head>
 <body>
     <script>
+        var SNIPE_STORAGE = 'snipe-ext',
+            defaultSettings = {"shortcut":{"key":{"id":32,"name":"Space"},"modifiers":[{"id":17,"name":"Ctrl","modifier":"ctrlKey"},{"id":18,"name":"Alt","modifier":"altKey"}]}},
+            settings = window.localStorage[SNIPE_STORAGE] ? JSON.parse(window.localStorage[SNIPE_STORAGE]) : defaultSettings;
+            
         safari.application.addEventListener("message", function(e) {
             switch (e.name) {
                 case 'getTabData':
@@ -19,6 +23,13 @@
                     var win = safari.application.browserWindows[e.message.winid];
                     win.activate();
                     win.tabs[e.message.tabid].activate();
+                break;
+                case 'getSettings':
+                    e.target.page.dispatchMessage("getSettings", settings);
+                break;
+                case 'updateSettings':
+                    settings = e.message;
+                    window.localStorage.setItem(SNIPE_STORAGE, JSON.stringify(settings));
                 break;
             }
         }, false);
