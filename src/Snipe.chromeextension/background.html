@@ -9,54 +9,38 @@
     <script>
         var results,
             currentWindow,
-            popup;
+            popup,
+            
+            SNIPE_STORAGE = 'snipe-ext',
+            defaultSettings = {"shortcut":{"key":{"id":32,"name":"Space"},"modifiers":[{"id":17,"name":"Ctrl","modifier":"ctrlKey"},{"id":18,"name":"Alt","modifier":"altKey"}]}},
+            settings = window.localStorage[SNIPE_STORAGE] ? JSON.parse(window.localStorage[SNIPE_STORAGE]) : defaultSettings;
         
         /**
-         * Handles using the extension as a popup
+         * Handles using the custom UI extension
          */
         chrome.extension.onRequest.addListener(function(e, sender, sendResponse) {
             switch (e.name) {
-                case 'openPopUp':
-                    chrome.windows.getCurrent(function(curWin) {
-                        currentWindow = curWin;
-                        
-                        var pWidth = 425,
-                            pHeight = 100,
-                            xOffset = Math.round(curWin.left + curWin.width/2 - pWidth/2),
-                            yOffset = Math.round(curWin.top + 100);
-                        
-                        chrome.windows.create({
-                            url: chrome.extension.getURL('popup.html'),
-                            top: yOffset,
-                            left: xOffset,
-                            width: pWidth,
-                            height: pHeight,
-                            type: 'popup'
-                        }, function(popupWin) {
-                            popup = popupWin;
-                        });
-                    });
-                break;
-                case 'closePopup':
-                    if (popup) {
-                        chrome.windows.remove(popup.id);
-                        popup = null;
-                    }
-                break;
                 case 'getTabData':
-                    sender.page.dispatchMessage("getTabData", getTabData());
+                    sender.page.dispatchMessage('getTabData', getTabData());
                 break;
                 case 'getTabResults':
                     getTabData(function(tabData) {
                         //Save results
                         results = getTabResults(e.message, tabData);
                         
-                        //Return the results to the popup
+                        //Return the results
                         sendResponse({name: 'getTabResults', message: results});
                     });
                 break;
                 case 'selectTab':
                     activateTab(e.message.winid, e.message.tabid);
+                break;
+                case 'getSettings':
+                    sendResponse({name: 'getSettings', message: settings});
+                break;
+                case 'updateSettings':
+                    settings = e.message;
+                    window.localStorage.setItem(SNIPE_STORAGE, JSON.stringify(settings));
                 break;
             }
         });
@@ -110,12 +94,6 @@
             }
             
             chrome.tabs.update(parseInt(tabid), {selected: true});
-            
-            //Close if in a popup
-            if (popup) {
-                chrome.windows.remove(popup.id);
-                popup = null;
-            }
         }
         
         
