@@ -1,3 +1,11 @@
+## 0.4 — _Mar 1st, 2011_
+ 
+ - Added settings window
+ - Added ability to customize the shortcut to activate Snipe
+ - Added toolbar button that toggles Snipe for both Chrome and Safari
+ - Removed popup from Chrome
+ - Moved Chrome Snipe UI to appear in page to be more in-line with Safari version
+
 ## 0.3.4.3 (Chrome) — _Feb 26th, 2011_
 
  - Maximized windows in Windows no longer exit maximized mode when selecting a tab in the same window
