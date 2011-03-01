@@ -3,9 +3,9 @@ function onMessageReceived(e) {
         case 'getTabResults':
             snipe.refresh(e.message);
         break;
-        case 'getFavicon':
-            document.querySelector('link[rel="shortcut icon"]')
-        break;
+        // case 'getFavicon':
+        //     document.querySelector('link[rel="shortcut icon"]')
+        // break;
         case 'getSettings':
             snipe.updateSettings(e.message);
         break;
