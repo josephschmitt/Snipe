@@ -9,11 +9,15 @@
     <script>
         var results,
             currentWindow,
-            popup,
             
             SNIPE_STORAGE = 'snipe-ext',
-            defaultSettings = {"shortcut":{"key":{"id":32,"name":"Space"},"modifiers":[{"id":17,"name":"Ctrl","modifier":"ctrlKey"},{"id":18,"name":"Alt","modifier":"altKey"}]}},
+            defaultSettings = {"firstrun": false, "shortcut":{"key":{"id":32,"name":"Space"},"modifiers":[{"id":17,"name":"Ctrl","modifier":"ctrlKey"},{"id":18,"name":"Alt","modifier":"altKey"}]}},
             settings = window.localStorage[SNIPE_STORAGE] ? JSON.parse(window.localStorage[SNIPE_STORAGE]) : defaultSettings;
+
+        //First run page
+        if (!settings.firstrun) {
+            showFirstRun();
+        }
         
         
         /**
@@ -50,7 +54,18 @@
                 break;
                 case 'updateSettings':
                     settings = e.message;
-                    window.localStorage.setItem(SNIPE_STORAGE, JSON.stringify(settings));
+                    updateSettings();
+                break;
+                case 'reloadTabs':
+                    chrome.windows.getAll({populate: true}, function(windows) {
+                        windows.forEach(function(win) {
+                            win.tabs.forEach(function(tab) {
+                                if (tab.url && new RegExp(safari.extension.baseURI).test(tab.url) == false) {
+                                    chrome.tabs.update(tab.id, {url: tab.url});
+                                }
+                            });
+                        });
+                    });
                 break;
             }
         });
@@ -94,6 +109,32 @@
             
             activateTab(winid, tabid);
         });
+        
+        function updateSettings() {
+            window.localStorage.setItem(SNIPE_STORAGE, JSON.stringify(settings));
+        }
+
+        function showFirstRun() {
+            // safari.application.openBrowserWindow().activeTab.url = safari.extension.baseURI + 'firstrun.html';
+            chrome.windows.getCurrent(function(curWindow) {
+                var pWidth = 390,
+                    pHeight = 390,
+                    xOffset = Math.round(curWindow.left + curWindow.width/2 - pWidth/2),
+                    yOffset = Math.round(curWindow.top + 100);
+
+                chrome.windows.create({
+                    url: chrome.extension.getURL('firstrun.html'),
+                    top: yOffset,
+                    left: xOffset,
+                    width: pWidth,
+                    height: pHeight,
+                    type: 'popup'
+                }, function() {
+                    settings.firstrun = true;
+                    updateSettings();
+                });
+            });
+        }
         
         function activateTab(winid, tabid) {
             //Only switch windows if the window isn't the same.

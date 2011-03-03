@@ -8,8 +8,14 @@
 <body>
     <script>
         var SNIPE_STORAGE = 'snipe-ext',
-            defaultSettings = {"shortcut":{"key":{"id":32,"name":"Space"},"modifiers":[{"id":17,"name":"Ctrl","modifier":"ctrlKey"},{"id":18,"name":"Alt","modifier":"altKey"}]}},
+            defaultSettings = {"firstrun": false, "shortcut":{"key":{"id":32,"name":"Space"},"modifiers":[{"id":17,"name":"Ctrl","modifier":"ctrlKey"},{"id":18,"name":"Alt","modifier":"altKey"}]}},
             settings = window.localStorage[SNIPE_STORAGE] ? JSON.parse(window.localStorage[SNIPE_STORAGE]) : defaultSettings;
+        
+        //First run page
+        if (!settings.firstrun) {
+            showFirstRun();
+        }
+        
         
         /**
          * Handles clicking on the toolbar button
@@ -36,10 +42,29 @@
                 break;
                 case 'updateSettings':
                     settings = e.message;
-                    window.localStorage.setItem(SNIPE_STORAGE, JSON.stringify(settings));
+                    updateSettings();
+                break;
+                case 'reloadTabs':
+                    safari.application.browserWindows.forEach(function(win) {
+                        win.tabs.forEach(function(tab) {
+                            if (tab.url && new RegExp(safari.extension.baseURI).test(tab.url) == false) {
+                                tab.url = tab.url;
+                            }
+                        });
+                    });
                 break;
             }
         }, false);
+        
+        function updateSettings() {
+            window.localStorage.setItem(SNIPE_STORAGE, JSON.stringify(settings));
+        }
+
+        function showFirstRun() {
+            safari.application.openBrowserWindow().activeTab.url = safari.extension.baseURI + 'firstrun.html';
+            settings.firstrun = true;
+            updateSettings();
+        }
 
         function getTabData() {
             var data = [],

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Welcome to Snipe!</title>
+    <link rel="stylesheet" href="snipe-core/styles/styles.css" type="text/css">
+</head>
+<body class="snipe popup">
+    <form class="settings">
+        <h1>Welcome to Snipe</h1>
+        <p>Here are a few things you should be aware of when using Snipe.</p>
+        <fieldgroup>
+            <label title="Click to edit the keyboard shortcut used to show/hide Snipe.">Shortcut</label>
+            <span class="shortcut-field"></span>
+            <p>Edit keyboard shortcut you'd like to use to bring up and dismiss Snipe.</p>
+        </fieldgroup>
+        <fieldgroup>
+            <label>Refresh Tabs</label>
+            <p>Before you can use Snipe, you must refresh any open tabs or windows you had open before you installation by clicking on the link below.</p>
+            <p><a class="refresh" href="#">Reload</a></p>
+        </fieldgroup>
+        <fieldgroup class="done">
+            <small>&copy; 2011 Joseph Schmitt | <a href="http://reusablebits.com">Reusable Bits</a></small>
+            <input type="button" class="done" value="Done!" />
+        </fieldgroup>
+    </form>
+    
+    <script type="text/javascript" src="snipe-core/js/lib.js"></script>
+    <script type="text/javascript" src="snipe-core/js/shortcut-field.js"></script>
+    <script>
+        window.resizeTo(390, 450);
+    
+        window.addEventListener('load', function(e) {
+            var settings = document.querySelector('form.settings'),
+                field = new ShortcutField(document.querySelector('.shortcut-field'), {update: onShortcutUpdated}),
+                refreshBtn = document.querySelector('.settings .refresh'),
+                doneBtn = document.querySelector('.settings input.done'),
+                storedSettings;
+            
+            function updateSettings() {
+                safari.self.tab.dispatchMessage('updateSettings', storedSettings);
+            }
+            
+
+            // EVENT SUBSCRIPTIONS _____________________________________________
+            settings.addEventListener('submit', onSubmit);
+            refreshBtn.addEventListener('click', onRefreshTabs);
+            doneBtn.addEventListener('click', onDone);
+            
+            //Safari-specific
+            safari.self.addEventListener("message", onMessageReceived, false);
+
+
+            // EVENT HANDLERS __________________________________________________
+            function onRefreshTabs(e) {
+                safari.self.tab.dispatchMessage('reloadTabs');
+                e.preventDefault();
+            }
+            
+            function onShortcutUpdated(key, modifiers) {
+                storedSettings['shortcut'] = {key: key, modifiers: modifiers};
+                updateSettings();
+            }
+            
+            function onSubmit(e) {
+                e.preventDefault();
+            }
+
+            function onDone(e) {
+                window.close();
+                e.preventDefault();
+            }
+            
+            //Safari-specific
+            function onMessageReceived(e) {
+                switch(e.name) {
+                    case 'getSettings':
+                        storedSettings = e.message;
+                        field.set(storedSettings.shortcut.key, storedSettings.shortcut.modifiers);
+                    break;
+                    case 'reloadTabs':
+                        
+                    break;
+                }
+            }
+            
+            
+            // CONSTRUCTOR _____________________________________________________
+            
+            //Get settings from background page
+            safari.self.tab.dispatchMessage('getSettings');
+        });
+    </script>
+</body>
+</html>
