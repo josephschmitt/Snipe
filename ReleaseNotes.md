@@ -1,3 +1,9 @@
+## 0.4.3.1 — _Mar 3rd, 2011_
+ - Fixed odd perspective when performing 3D transforms
+ - Fixed JS error preventing Safari version from activating via keyboard shortcut
+ - Fixed grammatical errors in firstrun page.
+ - Commented code back in that only shows firstrun page the first time the extension is run
+
 ## 0.4.3 — _Mar 3rd, 2011_
  - Fixed js error in firstrun page
  - Fixed potential CSS conflict with any element with the "invisible" class
