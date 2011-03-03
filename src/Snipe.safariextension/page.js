@@ -39,7 +39,7 @@ function updateSettings(settings) {
 }
 
 //Check to make sure not in a safari extension window
-if (window.top === window && new RegExp('safari-extension://').test(tab.url) == false) {
+if (window.top === window && new RegExp('safari-extension://').test(window.location.href) == false) {
     var snipe = new Snipe({
         maxResults: 5,
         refresh: getResults,
