@@ -30,11 +30,11 @@
 				<key>Image</key>
 				<string>Icon-19.png</string>
 				<key>Label</key>
-				<string>Toggle Snipe</string>
+				<string>Snipe</string>
 				<key>Palette Label</key>
-				<string>Toggle Snipe</string>
+				<string>Snipe</string>
 				<key>Tool Tip</key>
-				<string>Toggle Snipe</string>
+				<string>Snipe</string>
 			</dict>
 		</array>
 	</dict>
