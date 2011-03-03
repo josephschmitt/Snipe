@@ -29,7 +29,9 @@
     <script type="text/javascript" src="snipe-core/js/keycodes.js"></script>
     <script type="text/javascript" src="snipe-core/js/shortcut-field.js"></script>
     <script>
-        window.resizeTo(390, 450);
+        setTimeout(function() {
+            window.resizeTo(390, 450);
+        });
     
         window.addEventListener('load', function(e) {
             var settings = document.querySelector('form.settings'),

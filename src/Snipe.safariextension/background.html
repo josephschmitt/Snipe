@@ -12,9 +12,9 @@
             settings = window.localStorage[SNIPE_STORAGE] ? JSON.parse(window.localStorage[SNIPE_STORAGE]) : defaultSettings;
         
         //First run page
-        // if (!settings.firstrun) {
-            setTimeout(showFirstRun, 10);
-        // }
+        if (!settings.firstrun) {
+            showFirstRun();
+        }
         
         
         /**

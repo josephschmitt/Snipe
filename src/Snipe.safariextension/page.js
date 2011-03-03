@@ -38,7 +38,8 @@ function updateSettings(settings) {
     safari.self.tab.dispatchMessage('updateSettings', settings);
 }
 
-if (window.top === window) {
+//Check to make sure not in a safari extension window
+if (window.top === window && new RegExp('safari-extension://').test(tab.url) == false) {
     var snipe = new Snipe({
         maxResults: 5,
         refresh: getResults,
