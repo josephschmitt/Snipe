@@ -1,4 +1,7 @@
-## 0.4.1 — _Mar 1st, 2011_
+## 0.4.2 — _Mar 3rd, 2011_
+ - Added First Run page to help new users
+
+## 0.4.1 — _Mar 2nd, 2011_
 
  - Fixed favicons not being displayed
  - Fixed window scrolling to the top when initiating Snipe
