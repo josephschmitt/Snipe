@@ -13,7 +13,6 @@ After cloning this repository, make sure to [init the submodules](http://chrisje
 
 # TODO
 
- - Customize keyboard shortcut
  - Add a way to close a tab from the UI (close all matching tabs?)
  - Support favicons not placed in the root directory of a server
  - Highlight matched words/phrases in custom UI in Safari and Chrome
