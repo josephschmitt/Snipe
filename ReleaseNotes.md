@@ -1,5 +1,10 @@
+## 0.4.1 — _Mar 1st, 2011_
+
+ - Fixed favicons not being displayed
+ - Fixed window scrolling to the top when initiating Snipe
+
 ## 0.4 — _Mar 1st, 2011_
- 
+
  - Added settings window
  - Added ability to customize the shortcut to activate Snipe
  - Added toolbar button that toggles Snipe for both Chrome and Safari
@@ -14,7 +19,7 @@
 ## 0.3.5.2 (Chrome) — _Feb 25th, 2011_
 
  - Fixed typo in manifest pointing to asset for toolbar icon
- 
+
 ## 0.3.5.1 — _Feb 22nd, 2011_
 
  - First public release

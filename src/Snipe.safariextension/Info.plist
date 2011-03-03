@@ -11,9 +11,9 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.4</string>
+	<string>0.4.1</string>
 	<key>CFBundleVersion</key>
-	<string>0.4</string>
+	<string>0.4.1</string>
 	<key>Chrome</key>
 	<dict>
 		<key>Database Quota</key>
@@ -42,6 +42,10 @@
 	<dict>
 		<key>Scripts</key>
 		<dict>
+			<key>End</key>
+			<array>
+				<string>page.js</string>
+			</array>
 			<key>Start</key>
 			<array>
 				<string>snipe-core/js/lib.js</string>
@@ -51,7 +55,6 @@
 				<string>snipe-core/js/sniperesults.js</string>
 				<string>snipe-core/js/snipesettings.js</string>
 				<string>snipe-core/js/shortcut-field.js</string>
-				<string>page.js</string>
 			</array>
 		</dict>
 		<key>Stylesheets</key>
