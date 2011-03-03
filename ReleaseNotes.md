@@ -1,3 +1,6 @@
+## 0.4.3.2 — _Mar 3rd, 2011_
+ - Fixes issue with height of wrapper div
+
 ## 0.4.3.1 — _Mar 3rd, 2011_
  - Fixed odd perspective when performing 3D transforms
  - Fixed JS error preventing Safari version from activating via keyboard shortcut
