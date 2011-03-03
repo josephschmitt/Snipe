@@ -1,3 +1,8 @@
+## 0.4.3 — _Mar 3rd, 2011_
+ - Fixed js error in firstrun page
+ - Fixed potential CSS conflict with any element with the "invisible" class
+ - Replaced some images without transparency with jpgs instead of pngs to lower file size
+
 ## 0.4.2 — _Mar 3rd, 2011_
  - Added First Run page to help new users
 

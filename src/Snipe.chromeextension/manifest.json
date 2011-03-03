@@ -1,6 +1,6 @@
 {
     "name": "Snipe",
-    "version": "0.4.2",
+    "version": "0.4.3",
     "description": "Find the tab you're looking for without leaving your keyboard. Hit Ctrl+Alt+Space, type, and go!",
     "permissions": [
       "tabs", "http://*/*"
