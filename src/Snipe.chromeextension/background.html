@@ -60,7 +60,7 @@
                     chrome.windows.getAll({populate: true}, function(windows) {
                         windows.forEach(function(win) {
                             win.tabs.forEach(function(tab) {
-                                if (tab.url && new RegExp(safari.extension.baseURI).test(tab.url) == false) {
+                                if (tab.url && new RegExp(chrome.extension.getURL('firstrun.html')).test(tab.url) == false) {
                                     chrome.tabs.update(tab.id, {url: tab.url});
                                 }
                             });

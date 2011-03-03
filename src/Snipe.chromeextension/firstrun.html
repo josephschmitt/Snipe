@@ -26,6 +26,7 @@
     </form>
     
     <script type="text/javascript" src="snipe-core/js/lib.js"></script>
+    <script type="text/javascript" src="snipe-core/js/keycodes.js"></script>
     <script type="text/javascript" src="snipe-core/js/shortcut-field.js"></script>
     <script>
         window.addEventListener('load', function(e) {
@@ -82,7 +83,7 @@
             // CONSTRUCTOR _____________________________________________________
             
             //Get settings from background page
-            chrome.extension.sendRequest({name:'getSettings'});
+            chrome.extension.sendRequest({name:'getSettings'}, onMessageReceived);
         });
     </script>
 </body>
