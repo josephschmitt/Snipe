@@ -1,3 +1,6 @@
+## 0.4.3.3 (Chrome) — _Mar 4th, 2011_
+ - Fixes issue where currentWindow was no longer defined, so switching tabs would exit fullscreen on Windows OSes.
+
 ## 0.4.3.2 — _Mar 3rd, 2011_
  - Fixes issue with height of wrapper div
 
