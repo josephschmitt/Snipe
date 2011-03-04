@@ -8,7 +8,6 @@
 <body>
     <script>
         var results,
-            currentWindow,
             
             SNIPE_STORAGE = 'snipe-ext',
             defaultSettings = {"firstrun": false, "shortcut":{"key":{"id":32,"name":"Space"},"modifiers":[{"id":17,"name":"Ctrl","modifier":"ctrlKey"},{"id":18,"name":"Alt","modifier":"altKey"}]}},
@@ -137,14 +136,16 @@
         }
         
         function activateTab(winid, tabid) {
-            //Only switch windows if the window isn't the same.
-            //Avoids a Chrome for Windows bug where updating same window kicks it
-            //out of maximized mode.
-            if (!currentWindow || currentWindow.id != winid) {
-                chrome.windows.update(parseInt(winid), {focused: true});
-            }
-            
-            chrome.tabs.update(parseInt(tabid), {selected: true});
+            chrome.windows.getCurrent(function(curWin) {
+                //Only switch windows if the window isn't the same.
+                //Avoids a Chrome for Windows bug where updating same window kicks it
+                //out of maximized mode.
+                if (!curWin || curWin.id != winid) {
+                    chrome.windows.update(parseInt(winid), {focused: true});
+                }
+
+                chrome.tabs.update(parseInt(tabid), {selected: true});
+            });
         }
         
         
