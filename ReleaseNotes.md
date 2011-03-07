@@ -1,3 +1,6 @@
+## 0.4.4 — _Mar 6th, 2011_
+ - Added support for using Ctrl + P and Ctrl + N to navigate the tab search results
+
 ## 0.4.3.3 (Chrome) — _Mar 4th, 2011_
  - Fixes issue where currentWindow was no longer defined, so switching tabs would exit fullscreen on Windows OSes.
 
