@@ -1,3 +1,6 @@
+## 0.4.5 — _Mar 21st, 2011_
+ - Added support for using Ctrl + K and Ctrl + J to navigate the tab search results, and Ctrl + L to select
+
 ## 0.4.4 — _Mar 6th, 2011_
  - Added support for using Ctrl + P and Ctrl + N to navigate the tab search results
 
